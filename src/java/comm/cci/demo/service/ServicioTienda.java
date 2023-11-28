@@ -54,21 +54,21 @@ public class ServicioTienda extends Servicio{
 
             if (!existente(tiendaTO.getIdTienda())) {
 
-                PreparedStatement stmt = super.getConexion().prepareStatement("INSERT INTO tienda( nomTienda,categoria,descripcion) VALUES (?,?,?)");
+                PreparedStatement stmt = super.getConexion().prepareStatement("INSERT INTO tienda( nomTienda, descripcion, categoria) VALUES (?,?,?)");
 
                 stmt.setString(1, tiendaTO.getNomTienda());
-                stmt.setString(2, tiendaTO.getCategoriaTienda());
-                stmt.setString(3, tiendaTO.getDescripcionTienda());
+                stmt.setString(2, tiendaTO.getDescripcionTienda());
+                stmt.setString(3, tiendaTO.getCategoriaTienda());
 
                 stmt.execute();
                 //Cierro todas las conexiones con la BD para que este no se sobrecargue y se cierre
                 stmt.close();
 
             } else {
-                PreparedStatement stmt = super.getConexion().prepareStatement("UPDATE tienda SET nomTienda=?, categoria=? , descripcion=?where idTienda=?");
-                stmt.setString(1, tiendaTO.getNomTienda());
-                stmt.setString(2, tiendaTO.getCategoriaTienda());
-                stmt.setString(3, tiendaTO.getDescripcionTienda());
+                PreparedStatement stmt = super.getConexion().prepareStatement("UPDATE tienda SET nomTienda=?, descripcion=? , categoria=? where idTienda=?");
+                 stmt.setString(1, tiendaTO.getNomTienda());
+                stmt.setString(2, tiendaTO.getDescripcionTienda());
+                stmt.setString(3, tiendaTO.getCategoriaTienda());
                 stmt.setInt(4, tiendaTO.getIdTienda());
  stmt.execute();
             }
